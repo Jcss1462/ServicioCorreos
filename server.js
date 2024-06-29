@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: 'https://servicio-correo-node-efb3ac491db9.herokuapp.com',
+  origin: 'https://juancamilosalazarserna.xyz/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
   optionsSuccessStatus: 200
