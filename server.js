@@ -11,10 +11,13 @@ const port = process.env.PORT || 3000;
 
 const corsOptions = {
   origin: 'https://servicio-correo-node-efb3ac491db9.herokuapp.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
   optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); 
 app.use(express.json());
 
 const oauth2Client = new google.auth.OAuth2(
