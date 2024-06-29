@@ -2,12 +2,19 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { google } = require('googleapis');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+const corsOptions = {
+  origin: 'https://servicio-correo-node-efb3ac491db9.herokuapp.com',
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const oauth2Client = new google.auth.OAuth2(
