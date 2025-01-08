@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const dotenv = require('dotenv');
 const { google } = require('googleapis');
@@ -7,7 +9,7 @@ const cors = require('cors');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 443;
 
 const corsOptions = {
   origin: true, // "true" will copy the domain of the request back
@@ -79,6 +81,14 @@ app.post('/send-email', async (req, res) => {
   }
 });
 
-app.listen(port,'0.0.0.0', () => {
-  console.log(`Server is running on port ${port}`);
+////////////////////////////////////////////////////////////////////////////////
+
+// Configuración de HTTPS
+const httpsOptions = {
+  key: fs.readFileSync('./certs/key.pem'),
+  cert: fs.readFileSync('./certs/cert.pem'),
+};
+
+https.createServer(httpsOptions, app).listen(port, '0.0.0.0', () => {
+  console.log(`HTTPS server running on https://localhost:${port}`);
 });
