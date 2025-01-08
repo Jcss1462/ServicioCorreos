@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 8443;
 
 const corsOptions = {
-  origin: true, // "true" will copy the domain of the request back
+  origin: "*", // "true" will copy the domain of the request back
   // to the reply. If you need more control than this
   // use a function.
 
