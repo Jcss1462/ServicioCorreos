@@ -9,7 +9,7 @@ const cors = require('cors');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 443;
+const port = process.env.PORT || 8443;
 
 const corsOptions = {
   origin: true, // "true" will copy the domain of the request back
