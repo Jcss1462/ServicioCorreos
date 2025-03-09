@@ -84,10 +84,17 @@ app.post('/send-email', async (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////
 
 // Configuración de HTTPS
-const httpsOptions = {
-  key: fs.readFileSync('./certs/key.pem'),
-  cert: fs.readFileSync('./certs/cert.pem'),
-};
+const isProduction = process.env.ENVIRONMENT === 'production';
+const httpsOptions = isProduction
+  ? {
+      key: fs.readFileSync('/etc/letsencrypt/live/jcss1462mailsender.duckdns.org/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/jcss1462mailsender.duckdns.org/fullchain.pem'),
+    }
+  : {
+      key: fs.readFileSync('./certs/key.pem'),
+      cert: fs.readFileSync('./certs/cert.pem'),
+    };
+
 
 https.createServer(httpsOptions, app).listen(port, '0.0.0.0', () => {
   console.log(`HTTPS server running on https://localhost:${port}`);
